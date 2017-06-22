@@ -1,0 +1,2 @@
+# DiagnosticProject
+NG Project
