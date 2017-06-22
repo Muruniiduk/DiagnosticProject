@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
 
@@ -29,6 +32,8 @@ public class Main {
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(getInputFile(arguments)))){
             int linesCount = 0;
+
+            List<Disease> diseases = new ArrayList<>(); //TODO: check if list suits
             while (true) {
                 final String textLine = bufferedReader.readLine();
                 if (textLine == null)
@@ -36,9 +41,18 @@ public class Main {
 
                 linesCount++;
                 // TODO: line parsing logic...
-                System.out.println(textLine);
+                int indexOfFfirstComma = textLine.indexOf(',');
+                String diseaseName = textLine.substring(0,indexOfFfirstComma);
+                String[] symptoms = textLine.substring(indexOfFfirstComma+1).trim().split(",");
+                diseases.add(new Disease(diseaseName, symptoms));
+
             }
 
+            Collections.sort(diseases);
+            for(Disease disease: diseases){
+                System.out.println(disease.toString());
+            }
+            System.out.println("\n---------");
             System.out.println("Input file contains " + linesCount + " lines.");
         }
     }
