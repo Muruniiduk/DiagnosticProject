@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -33,7 +31,9 @@ public class Main {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(getInputFile(arguments)))){
             int linesCount = 0;
 
-            List<Disease> diseases = new ArrayList<>(); //TODO: check if list suits
+            List<Disease> diseases = new ArrayList<>();
+            Map<String, Integer> symptomCounterMap = new HashMap<>();
+
             while (true) {
                 final String textLine = bufferedReader.readLine();
                 if (textLine == null)
@@ -41,9 +41,17 @@ public class Main {
 
                 linesCount++;
                 // TODO: line parsing logic...
-                int indexOfFfirstComma = textLine.indexOf(',');
-                String diseaseName = textLine.substring(0,indexOfFfirstComma);
-                String[] symptoms = textLine.substring(indexOfFfirstComma+1).trim().split(",");
+                int indexOfFirstComma = textLine.indexOf(',');
+                String diseaseName = textLine.substring(0,indexOfFirstComma);
+                String[] symptoms = textLine.substring(indexOfFirstComma+1).trim().split(",");
+
+                for (String symptom: symptoms){
+                    if (symptomCounterMap.keySet().contains(symptom))
+                        symptomCounterMap.put(symptom, symptomCounterMap.get(symptom) + 1);
+
+                    else symptomCounterMap.put(symptom, 1);
+                }
+
                 diseases.add(new Disease(diseaseName, symptoms));
 
             }
