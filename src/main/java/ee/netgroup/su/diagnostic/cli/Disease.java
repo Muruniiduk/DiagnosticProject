@@ -7,28 +7,46 @@ import java.util.Set;
 public class Disease implements Comparable<Disease> {
 
     private String diseaseName;
-    private Set<String> symptoms;
+    private Set<Symptom> symptoms;
 
 
-    public Disease(String diseaseName, String[] symptoms) {
+    public Disease(String diseaseName, String[] symptomsString) {
         this.diseaseName = diseaseName;
-        this.symptoms = new HashSet<>(Arrays.asList(symptoms));
+        this.symptoms = new HashSet<>();
+        for (String symptom: symptomsString)
+            this.symptoms.add(new Symptom(symptom));
     }
 
+    public Disease(String diseaseName) {
+        this.diseaseName = diseaseName;
+        this.symptoms = new HashSet<>();
+    }
 
     public String getDiseaseName() {
         return diseaseName;
     }
 
-    public Set<String> getSymptoms() {
+    public Set<Symptom> getSymptoms() {
         return symptoms;
+    }
+
+    public void addSymptom(Symptom symptom) {
+        symptoms.add(symptom);
+    }
+
+    public String toStringWithSymptoms() {
+        String symptomsAsString = "";
+        for(Symptom symptom: symptoms)
+            symptomsAsString = symptomsAsString.concat(symptom.toString() + ", ");
+        symptomsAsString = symptomsAsString.substring(0,symptomsAsString.length()-2);
+        return "Disease: " + diseaseName
+                + "; symptoms: " +  symptomsAsString;
     }
 
 
     @Override
     public String toString() {
-        return "Disease: " + diseaseName
-                + ", symptoms: " +  symptoms;
+        return diseaseName;
     }
 
     @Override
