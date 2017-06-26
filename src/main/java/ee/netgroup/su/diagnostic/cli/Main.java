@@ -59,10 +59,11 @@ public class Main {
             if (choice.equals("s")) {
                 System.out.println("Continue to write symptoms. Press enter to finish.");
                 printFilteredDiseases(cmdLineReader, diseaseList, symptomList);
-            }
-            else if (choice.equals("d"))
+            } else if (choice.equals("d")) {
                 System.out.println("Answer if patient has above mentioned symptoms with a 'yes' (y) or 'no' (n)");
                 diagnose(cmdLineReader, diseaseList, symptomList);
+
+            }
 
         }
 
