@@ -1,8 +1,5 @@
 package ee.netgroup.su.diagnostic.cli;
 
-import com.sun.tools.javac.code.Symtab;
-import sun.jvm.hotspot.debugger.cdbg.Sym;
-
 import java.io.*;
 import java.util.*;
 
@@ -107,7 +104,7 @@ public class Main {
     }
 
     private static Map<Symptom, Integer> filterOutDiseasesThatMatch(Map<Symptom, Integer> symptomFreq, ArrayList<Disease> clonedDiseaseList,
-                                                   Symptom symptomThatHalvesPossibleDiseases,  boolean answeredYes) { //TODO: cant be changed to local because the variable needs to change?
+                                                   Symptom symptomThatHalvesPossibleDiseases,  boolean answeredYes) {
         List<Disease> diseasesToRemove = new ArrayList<>();
         for (Disease disease: clonedDiseaseList){
             if (!disease.getSymptoms().contains(symptomThatHalvesPossibleDiseases) && answeredYes)
